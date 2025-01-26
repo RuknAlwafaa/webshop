@@ -67,6 +67,12 @@ def get_product_filter_data(query_args=None):
 		frappe.log_error("Product query with filter failed")
 		return {"exc": "Something went wrong!"}
 
+	# add items barcodes
+	items = result["items"] or []
+	for item in items:
+		barcodes = frappe.get_all("Item Barcode",filters={"parent": item["item_code"]},fields=["barcode"])
+		item["barcodes"] = [barcode["barcode"] for barcode in barcodes]
+
 	# discount filter data
 	filters = {}
 	discounts = result["discounts"]
