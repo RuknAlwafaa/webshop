@@ -41,6 +41,7 @@ class ProductQuery:
 			"website_warehouse",
 			"ranking",
 			"on_backorder",
+			"custom_is_new",
 		]
 
 	def query(self, attributes=None, fields=None, search_term=None, start=0, item_group=None):
@@ -66,6 +67,8 @@ class ProductQuery:
 			self.build_search_filters(search_term)
 		if self.settings.hide_variants:
 			self.filters.append(["variant_of", "is", "not set"])
+		if fields and fields.get("custom_is_new") == 1:
+			self.page_length = 184467440737095516
 
 		# query results
 		if attributes:
