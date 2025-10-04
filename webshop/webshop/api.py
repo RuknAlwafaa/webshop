@@ -62,6 +62,7 @@ def get_product_filter_data(query_args=None):
 			search_term=search,
 			start=start,
 			item_group=item_group,
+			is_offer=query_args.get("is_offer"),
 		)
 	except Exception:
 		frappe.log_error("Product query with filter failed")

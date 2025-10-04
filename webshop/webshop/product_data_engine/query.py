@@ -45,7 +45,7 @@ class ProductQuery:
 			"custom_is_new",
 		]
 
-	def query(self, attributes=None, fields=None, search_term=None, start=0, item_group=None):
+	def query(self, attributes=None, fields=None, search_term=None, start=0, item_group=None, is_offer=None):
 		"""
 		Args:
 		        attributes (dict, optional): Item Attribute filters
@@ -69,6 +69,8 @@ class ProductQuery:
 		if self.settings.hide_variants:
 			self.filters.append(["variant_of", "is", "not set"])
 		if fields and fields.get("custom_is_new") == 1:
+			self.page_length = 184467440737095516
+		if is_offer == 1:
 			self.page_length = 184467440737095516
 
 		# query results
