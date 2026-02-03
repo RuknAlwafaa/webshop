@@ -499,7 +499,7 @@ def check_if_user_is_customer(user=None):
 
 
 @frappe.whitelist()
-def make_website_item(doc, save=True):
+def make_website_item(doc, save=True, published=1, set_store=0, supplier=None):
 	"""
 	Make Website Item from Item. Used via Form UI or patch.
 	"""
@@ -530,6 +530,12 @@ def make_website_item(doc, save=True):
 	]
 	for field in fields_to_map:
 		website_item.update({field: doc.get(field)})
+
+	if hasattr(website_item, "published"):
+		website_item.published = 1 if int(published) else 0
+
+	if supplier and set_store and hasattr(website_item, "custom_store"):
+		website_item.custom_store = supplier
 
 	# Needed for publishing/mapping via Form UI only
 	if not frappe.flags.in_migrate and (
