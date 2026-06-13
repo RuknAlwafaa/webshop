@@ -70,8 +70,6 @@ class ProductQuery:
 			self.filters.append(["variant_of", "is", "not set"])
 		if fields and fields.get("custom_is_new") == 1:
 			self.page_length = 184467440737095516
-		if is_offer == 1:
-			self.page_length = 184467440737095516
 
 		# query results
 		if attributes:
