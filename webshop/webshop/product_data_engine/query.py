@@ -38,6 +38,7 @@ class ProductQuery:
 			"item_group",
 			"web_long_description",
 			"short_description",
+			"short_english_description",
 			"route",
 			"website_warehouse",
 			"ranking",
